@@ -1,0 +1,19 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.loader {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0000;
+    background-color: rgba(0, 0, 0, 0.329);
+}
+
+.form-btn {
+    width: 250px !important;
+    margin: 30px !important;
+}
