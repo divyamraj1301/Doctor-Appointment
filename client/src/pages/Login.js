@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/LoginStyles.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Input } from "antd";
+import { Form, Input, message } from "antd";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import DoctorLogin from "../assets/doctor-login.png";
@@ -19,10 +19,10 @@ const Login = () => {
       dispatch(hideLoading());
       if (res.data.success) {
         localStorage.setItem("token", res.data.token);
-        alert("Login Successfully");
+        message.success("Login Successfully");
         navigate("/");
       } else {
-        alert(res.data.message);
+        message.error(res.data.message);
       }
     } catch (error) {
       dispatch(hideLoading());
@@ -49,11 +49,11 @@ const Login = () => {
         <h3 className="text-center">Login</h3>
 
         <Form.Item label="Email" name="email">
-          <Input type="text" required />
+          <Input type="email" required />
         </Form.Item>
 
         <Form.Item label="Password" name="password">
-          <Input type="text" required />
+          <Input type="password" required />
         </Form.Item>
         <Link to="/register" className="m-2">
           Click here to Register

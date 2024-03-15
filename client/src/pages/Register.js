@@ -42,11 +42,11 @@ const Register = () => {
         </Form.Item>
 
         <Form.Item label="Email" name="email">
-          <Input type="text" required />
+          <Input type="email" required />
         </Form.Item>
 
         <Form.Item label="Password" name="password">
-          <Input type="text" required />
+          <Input type="password" required />
         </Form.Item>
         <Link to="/login" className="m-2">
           Click here to login

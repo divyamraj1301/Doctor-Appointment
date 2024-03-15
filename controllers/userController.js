@@ -28,34 +28,6 @@ const registerController = async (req, res) => {
   }
 };
 
-// const loginController = async (req, res) => {
-//     try {
-//         const { email, password } = req.body;
-//         const user = await userModel.findOne({ email: email });
-//         // console.log(user)
-//         if (!user) {
-//             return res.status(200).json({ success: false, message: 'User not registered' });
-//         }
-
-//         const passwordMatch = await bcrypt.compare(password, user.password);
-//         if (!passwordMatch) {
-//             return res.status(200).json({ success: true, message: 'Invalid credentials' });
-//         }
-
-//         const token = jwt.sign({ id: user._id }, process.env.JWT, { expiresIn: '1d' });
-//         res.cookie('jwt', token, {
-//             maxAge: 12 * 60 * 60 * 1000,
-//             sameSite: 'None',
-//             secure: true,
-//             httpOnly: true
-//         })
-//         res.status(200).send({ message: 'Login Successful.', success: true, token });
-
-//     } catch (error) {
-//         res.status(500).json({ success: false, message: `Error in controller : ${error.message}` });
-//     }
-// }
-
 const loginController = async (req, res) => {
   try {
     const user = await userModel.findOne({ email: req.body.email });
@@ -104,79 +76,6 @@ const authController = async (req, res) => {
     });
   }
 };
-
-// const authController = async (req, res) => {
-//     // const token = req.cookies.jwt
-//     // console.log(req.cookies.jwt)
-//     try {
-//         const token = req.cookies.jwt
-
-//         if (token) {
-
-//             const verifyUser = jwt.verify(token, process.env.JWT);
-//             const { id } = verifyUser;
-//             const rootUser = await userModel.findById(id);
-//             rootUser.password = undefined;
-//             // console.log(rootUser)
-
-//             if (!rootUser) {
-//                 return res.status(200).json({ success: false, message: 'User not found.' });
-//             }
-//             else {
-//                 res.status(200).json({ success: true, data: rootUser })
-//             }
-//         }
-//         else {
-//             res.status(422).json({ success: false, message: "JWT Not found" })
-//         }
-
-//     } catch (error) {
-//         res.status(500).json({ success: false, message: `Error in auth : ${error.message}` });
-//     }
-// }
-
-// const logOut = async (req, res) => {
-//     try {
-//         req.rootUser.tokens = req.rootUser.tokens.filter((curelem) => {
-//             return curelem.token !== req.token
-//         });
-
-//         res.clearCookie("jwt", { path: "/" });
-
-//         req.rootUser.save();
-
-//         res.status(200).json({ message: "Logout " })
-
-//     } catch (error) {
-//         console.log(error)
-//         res.status(401).json({ status: 401, error })
-//     }
-// }
-
-// const authController = async (req, res) => {
-//     try {
-//       const user = await userModel.findById({ _id: req.body.userId });
-//       user.password = undefined;
-//       if (!user) {
-//         return res.status(200).send({
-//           message: "user not found",
-//           success: false,
-//         });
-//       } else {
-//         res.status(200).send({
-//           success: true,
-//           data: user,
-//         });
-//       }
-//     } catch (error) {
-//       console.log(error);
-//       res.status(500).send({
-//         message: "auth error",
-//         success: false,
-//         error,
-//       });
-//     }
-//   };
 
 const applyDoctorController = async (req, res) => {
   try {
@@ -287,43 +186,6 @@ const bookAppointmentController = async (req, res) => {
   }
 };
 
-// const bookingAvailabilityController = async (req, res) => {
-//     console.log(req.body);
-//   try {
-//     const date = moment(req.body.date, "DD-MM-YY").toISOString();
-//     const fromTime = moment(req.body.time, "HH:mm")
-//       .subtract(1, "hours")
-//       .toISOString();
-//     const toTime = moment(req.body.time, "HH:mm").add(1, "hours").toISOString();
-//     const doctorId = req.body.doctorId;
-//     const bookingId = req.body.id;
-
-//     console.log(fromTime, toTime);
-
-//     const appointment = await appointmentModel.find({
-//       doctorId,
-//       date,
-//       time: {
-//         $gte: fromTime,
-//         $lte: toTime,
-//       },
-//     });
-//     if (appointment.length > 0) {
-//       return res
-//         .status(200)
-//         .json({ message: "Appointment not available", success: true });
-//     } else {
-//       return res
-//         .status(200)
-//         .json({ success: true, message: "Appointment available" });
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     res
-//       .status(500)
-//       .json({ success: false, message: "Error in booking", error });
-//   }
-// };
 const bookingAvailabilityController = async (req, res) => {
   try {
     const { doctorId, date, time, id, userId } = req.body;
