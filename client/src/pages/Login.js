@@ -27,7 +27,7 @@ const Login = () => {
     } catch (error) {
       dispatch(hideLoading());
       console.log(error);
-      alert("Something went wrong");
+      message.error("Something went wrong");
     }
   };
 

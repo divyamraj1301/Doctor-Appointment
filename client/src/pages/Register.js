@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/RegisterStyles.css";
 import DoctorRegister from "../assets/DoctorRegister.png";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Input } from "antd";
+import { Form, Input, message } from "antd";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import axios from "axios";
@@ -17,14 +17,14 @@ const Register = () => {
       const res = await axios.post("/api/v1/user/register", val);
       dispatch(hideLoading());
       if (res.data.success) {
-        alert("Registered Successfully");
+        message.success("Registered Successfully");
         navigate("/login");
       } else {
-        alert(res.data.message);
+        message.error(res.data.message);
       }
     } catch (error) {
       dispatch(hideLoading());
-      alert("Something went wrong.");
+      message.error("Something went wrong.");
       console.log(error);
     }
   };

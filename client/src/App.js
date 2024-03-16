@@ -23,7 +23,6 @@ function App() {
         <Spin />
       ) : (
         <Routes>
-          
           <Route
             path="/apply-for-doctor"
             element={

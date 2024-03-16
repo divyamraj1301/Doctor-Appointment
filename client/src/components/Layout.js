@@ -4,7 +4,7 @@ import { adminMenu, userMenu } from "../data/data";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { Badge } from "antd";
+import { Badge, message } from "antd";
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
@@ -13,21 +13,9 @@ const Layout = ({ children }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    message.success("Logged out successfully.");
     navigate("/login");
-    alert("Logged out successfully.");
   };
-
-  // const handleLogout = async () => {
-  //         const res = await axios.post('/api/v1/user/logOut', {
-  //             withCredentials: true,
-  //         })
-  //         if (res.status === 200) {
-  //             localStorage.removeItem('token')
-  //             alert("Logged out successfully.");
-  //             navigate('/login');
-  //         }
-  //         console.log('abc')
-  // }
 
   const doctorMenu = [
     {
