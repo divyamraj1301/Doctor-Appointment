@@ -10,14 +10,13 @@ import { showLoading, hideLoading } from "../redux/features/alertSlice";
 const BookingPage = () => {
   const { user } = useSelector((state) => state.user);
   const [doctors, setDoctors] = useState([]);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState();
   const [time, setTime] = useState();
   const [isAvailable, setIsAvailable] = useState(false);
   const params = useParams();
   const dispatch = useDispatch();
 
   const getUserData = async () => {
-    console.log(user.phone);
     try {
       const res = await axios.post(
         "/api/v1/doctor/getDoctorById",
@@ -41,7 +40,7 @@ const BookingPage = () => {
   const handleBooking = async () => {
     try {
       if (!date && !time) {
-        return alert("Date and time required");
+        return message.warning("Date and time required");
       }
       dispatch(showLoading());
       const res = await axios.post(
@@ -49,10 +48,10 @@ const BookingPage = () => {
         {
           doctorId: params.doctorId,
           userId: user._id,
-          patientName: user.name,
-          patientPhone: user.phone,
-          doctorName: doctors.firstName + " " + doctors.lastName,
-          doctorPhone: doctors.phone,
+          // patientName: user.name,
+          // patientPhone: user.phone,
+          // doctorName: doctors.firstName + " " + doctors.lastName,
+          // doctorPhone: doctors.phone,
           doctorInfo: doctors,
           date: date,
           userInfo: user,
@@ -66,40 +65,13 @@ const BookingPage = () => {
       );
       dispatch(hideLoading());
       if (res.data.success) {
-        alert("Appointment successfully booked");
+        message.success(res.data.message);
       }
     } catch (error) {
       dispatch(hideLoading());
       console.log(error);
     }
   };
-
-  // const handleAvailability = async (id) => {
-  //   console.log(date, time);
-  //   try {
-  //     dispatch(showLoading());
-  //     const res = await axios.post(
-  //       "/api/v1/user/booking-availability",
-  //       { doctorId: params.doctorId, date, time, id: id },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //         },
-  //       }
-  //     );
-  //     dispatch(hideLoading());
-  //     if (res.data.success) {
-  //       setIsAvailable(true);
-  //       console.log(isAvailable);
-  //       message.success(res.data.message);
-  //     } else {
-  //       message.error(res.data.message);
-  //     }
-  //   } catch (error) {
-  //     dispatch(hideLoading());
-  //     console.log(error);
-  //   }
-  // };
 
   const handleAvailability = async (id) => {
     try {
@@ -122,9 +94,9 @@ const BookingPage = () => {
       if (res.data.success) {
         setIsAvailable(true);
         console.log(isAvailable);
-        message.success(res.data.message);
+        message.warning(res.data.message);
       } else {
-        message.error(res.data.message);
+        message.warning(res.data.message);
       }
     } catch (error) {
       dispatch(hideLoading());
@@ -150,7 +122,7 @@ const BookingPage = () => {
       <h3 className="p-4">Booking Page</h3>
       <div className="container m-2 p-4">
         {doctors && (
-          <div className="">
+          <div>
             <h4>
               Dr. {doctors.firstName} {doctors.lastName}
             </h4>
@@ -170,26 +142,20 @@ const BookingPage = () => {
                 }}
               />
 
-              {/* <TimePicker
-                aria-required={"true"}
+              <TimePicker
                 format="HH:mm"
                 className="mt-2"
                 onChange={(value) => {
-                  console.log(moment(value).format("hh:mm"));
-                  if (value) {
-                    setTime(moment(value).format("HH:mm"));
-                  } else {
-                    setTime(null); // or whatever you prefer for handling null time value
-                  }
+                  setTime(moment(value).format("HH:mm"));
                 }}
-              /> */}
+              />
 
-              <TimePicker
+              {/* <TimePicker
                 aria-required={"true"}
                 className="mt-2"
                 format="HH:mm"
                 onChange={handleTimeChange}
-              />
+              /> */}
 
               <button
                 className="btn btn-primary mt-2"
@@ -200,14 +166,9 @@ const BookingPage = () => {
                 Check Availability
               </button>
 
-              <button className="btn btn-success mt-2" onClick={handleBooking}>
+              <button className="btn btn-dark mt-2" onClick={handleBooking}>
                 Book Now
               </button>
-              {/* {
-                                    !isAvailable && (
-                                        
-                                    )
-                                } */}
             </div>
           </div>
         )}

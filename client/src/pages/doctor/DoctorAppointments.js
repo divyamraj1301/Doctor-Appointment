@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import axios from "axios";
 import moment from "moment";
-import { Table } from "antd";
+import { Table, message } from "antd";
 
 const DoctorAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -55,11 +55,7 @@ const DoctorAppointments = () => {
     {
       title: "Name",
       dataIndex: "name",
-      render: (text, record) => (
-        <span>
-          {record.patientName} 
-        </span>
-      ),
+      render: (text, record) => <span>{record.patientName}</span>,
     },
     {
       title: "Phone",

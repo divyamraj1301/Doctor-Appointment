@@ -28,7 +28,7 @@ const NotificationPage = () => {
       if (res.data.success) {
         message.success("Message marked as read");
       } else {
-        message.error("Something went wrong");
+        message.success("Something went wrong");
       }
     } catch (error) {
       dispatch(hideLoading());
@@ -50,13 +50,13 @@ const NotificationPage = () => {
       );
       dispatch(hideLoading());
       if (res.data.success) {
-        alert(res.data.message);
+        message.success(res.data.message);
       } else {
-        alert(res.data.message);
+        message.success(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      alert("Something went wrong");
+      message.error("Something went wrong");
     }
   };
 
@@ -81,6 +81,7 @@ const NotificationPage = () => {
             </div>
           ))}
         </Tabs.TabPane>
+
         <Tabs.TabPane tab="Read" key={1}>
           <div className="d-flex justify-content-end">
             <h4

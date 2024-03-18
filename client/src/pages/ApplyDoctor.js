@@ -39,6 +39,7 @@ const ApplyDoctor = () => {
       } else {
         message.error("Unexpected error occured");
       }
+      console.log(val)
     } catch (error) {
       dispatch(hideLoading());
       console.log(error);

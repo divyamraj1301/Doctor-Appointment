@@ -10,7 +10,7 @@ const Home = () => {
 
   const getUserData = async () => {
     try {
-      const res = await axios.post("/api/v1/user/getAllDoctors", {
+      const res = await axios.get("/api/v1/user/getAllDoctors", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
