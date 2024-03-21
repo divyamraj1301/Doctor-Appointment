@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1de51015.css",
+    "main.js": "/static/js/main.0d00ffd4.js",
+    "static/js/787.d5fa4d18.chunk.js": "/static/js/787.d5fa4d18.chunk.js",
+    "static/media/doctor-login.png": "/static/media/doctor-login.1b2652852713602c9840.png",
+    "static/media/DoctorRegister.png": "/static/media/DoctorRegister.dc069660ad720e0848a3.png",
+    "index.html": "/index.html",
+    "main.1de51015.css.map": "/static/css/main.1de51015.css.map",
+    "main.0d00ffd4.js.map": "/static/js/main.0d00ffd4.js.map",
+    "787.d5fa4d18.chunk.js.map": "/static/js/787.d5fa4d18.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1de51015.css",
+    "static/js/main.0d00ffd4.js"
+  ]
+}
