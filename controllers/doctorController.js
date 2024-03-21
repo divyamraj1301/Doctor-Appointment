@@ -60,12 +60,15 @@ const doctorAppointmentsController = async (req, res) => {
     const doctor = await doctorModel.findOne({ userId: req.body.userId });
     const appointments = await appointmentModel.find({
       doctorId: doctor._id,
+      // doctorId: req.body.doctorId,
     });
+
     res.status(200).json({
       success: true,
       message: "Data fetched successfully",
       data: appointments,
     });
+    console.log(appointments);
   } catch (error) {
     res
       .status(500)
@@ -89,7 +92,7 @@ const updateStatusController = async (req, res) => {
       onClickPath: "/doctor-appointments",
     });
     await user.save();
-    resss
+    res
       .status(200)
       .json({ success: true, message: "Appointment status updated" });
   } catch (error) {

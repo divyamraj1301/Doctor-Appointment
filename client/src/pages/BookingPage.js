@@ -48,10 +48,10 @@ const BookingPage = () => {
         {
           doctorId: params.doctorId,
           userId: user._id,
-          // patientName: user.name,
-          // patientPhone: user.phone,
-          // doctorName: doctors.firstName + " " + doctors.lastName,
-          // doctorPhone: doctors.phone,
+          patientName: user.name,
+          patientPhone: user.phone,
+          doctorName: doctors.firstName + " " + doctors.lastName,
+          doctorPhone: doctors.phone,
           doctorInfo: doctors,
           date: date,
           userInfo: user,
@@ -80,9 +80,9 @@ const BookingPage = () => {
         "/api/v1/user/booking-availability",
         {
           doctorId: params.doctorId,
-          date: date,
-          time: time,
-          id: id,
+          date,
+          time,
+          id,
         },
         {
           headers: {
@@ -94,7 +94,7 @@ const BookingPage = () => {
       if (res.data.success) {
         setIsAvailable(true);
         console.log(isAvailable);
-        message.warning(res.data.message);
+        message.success(res.data.message);
       } else {
         message.warning(res.data.message);
       }
@@ -137,15 +137,17 @@ const BookingPage = () => {
                 format="DD-MM-YYYY"
                 className="mt-2"
                 onChange={(value) => {
-                  // setIsAvailable(false)
+                  // setIsAvailable(false);
                   setDate(moment(value).format("DD-MM-YYYY"));
                 }}
               />
 
               <TimePicker
+                aria-required={"true"}
                 format="HH:mm"
-                className="mt-2"
+                className="mt-3"
                 onChange={(value) => {
+                  // setIsAvailable(false);
                   setTime(moment(value).format("HH:mm"));
                 }}
               />

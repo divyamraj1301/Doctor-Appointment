@@ -17,10 +17,15 @@ const DoctorAppointments = () => {
       if (res.data.success) {
         setAppointments(res.data.data);
       }
+      // console.log(res);
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    getAppointments();
+  }, []);
 
   const handleStatus = async (record, status) => {
     try {
@@ -43,10 +48,6 @@ const DoctorAppointments = () => {
     }
   };
 
-  useEffect(() => {
-    getAppointments();
-  }, []);
-
   const columns = [
     {
       title: "ID",
@@ -67,7 +68,8 @@ const DoctorAppointments = () => {
       dataIndex: "date",
       render: (text, record) => (
         <span>
-          {record.date} & {record.time}
+          {moment(record.date).format("DD-MM-YYYY")}{" "}
+          {moment(record.time).format("HH:mm")}
         </span>
       ),
     },

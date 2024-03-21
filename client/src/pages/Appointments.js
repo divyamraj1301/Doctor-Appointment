@@ -36,23 +36,28 @@ const Appointments = () => {
       dataIndex: "name",
       render: (text, record) => (
         <span>
-          {record.doctorName}
+          {record.doctorId.firstName} {record.doctorId.lastName}
         </span>
       ),
+      // <span>{record.doctorName}</span>,
     },
     {
       title: "Phone",
       dataIndex: "phone",
-      render: (text, record) => <span>{record.doctorPhone}</span>,
+      render: (text, record) => <span>{record.doctorId.phone}</span>,
+      // <span>{record.doctorPhone}</span>,
     },
     {
       title: "Date and Time",
       dataIndex: "date",
       render: (text, record) => (
         <span>
-          {record.date} &
-          {record.time}
+          {moment(record.date).format("DD-MM-YYYY")} &nbsp;
+          {moment(record.time).format("HH:mm")}
         </span>
+        // <span>
+        //   {record.date} &{record.time}
+        // </span>
       ),
     },
     {

@@ -28,7 +28,7 @@ const NotificationPage = () => {
       if (res.data.success) {
         message.success("Message marked as read");
       } else {
-        message.success("Something went wrong");
+        message.error("Something went wrong");
       }
     } catch (error) {
       dispatch(hideLoading());
